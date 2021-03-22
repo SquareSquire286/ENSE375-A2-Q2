@@ -1,0 +1,53 @@
+package my.package.ClusteringAlgorithms;
+
+import java.io.File;
+
+import net.sf.javaml.clustering.Clusterer;
+import net.sf.javaml.clustering.KMeans;
+import net.sf.javaml.clustering.FarthestFirst;
+import net.sf.javaml.clustering.AQBC;
+import net.sf.javaml.core.Dataset;
+import net.sf.javaml.tools.data.FileHandler;
+
+public class ClusteringAlgorithms
+{
+    public static void main(String[] args) throws Exception
+    {
+	ClusteringAlgorithms test = new ClusteringAlgorithms();
+	test.KMeansClustering();
+	test.AQBCClustering();
+	test.FarthestFirstClustering();
+
+	return;
+    }
+
+    public void KMeansClustering()
+    {
+	Dataset data = FileHandler.loadDataset(new File("iris.csv"), 4, ",");
+
+	Clusterer km = new KMeans();
+
+	Dataset[] clusters = km.cluster(data);
+	System.out.println("Cluster count; " + clusters.length);
+    }
+
+    public void AQBCClustering()
+    {
+	Dataset data = FileHandler.loadDataset(new File("iris.csv"), 4, ",");
+
+	Clusterer aqbc = new AQBC();
+
+	Dataset[] clusters = aqbc.cluster(data);
+	System.out.println("Cluster count; " + clusters.length);
+    }
+
+    public void FarthestFirstClustering()
+    {
+	Dataset data = FileHandler.loadDataset(new File("iris.csv"), 4, ",");
+
+	Clusterer ff = new FarthestFirst();
+
+	Dataset[] clusters = ff.cluster(data);
+	System.out.println("Cluster count; " + clusters.length);
+    }
+}
